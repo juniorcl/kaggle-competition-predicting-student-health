@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# pickle file
+*.pkl
+*.pickle
+
+# data files
+*.csv
+*.parquet
+
+# CatBoost
+catboost_info/
