@@ -47,7 +47,7 @@ def tune_lightgbm(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
             'verbosity': -1,
             'num_class': num_class,
             'random_state': 42,
-            'n_jobs': 1,
+            'n_jobs': -1,
             'num_leaves': trial.suggest_int('num_leaves', 16, 256),
             'max_depth': trial.suggest_int('max_depth', 3, 12),
             'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.2, log=True),
@@ -83,7 +83,7 @@ def tune_lightgbm(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
 
 
     study = optuna.create_study(direction="minimize", pruner=optuna.pruners.MedianPruner(n_warmup_steps=2))
-    study.optimize(lambda trial: objective(trial, folds), n_trials=n_trials, n_jobs=-1, show_progress_bar=True)
+    study.optimize(lambda trial: objective(trial, folds), n_trials=n_trials, n_jobs=1, show_progress_bar=True)
 
     logger.info(f"Best Log Loss: {study.best_value} | Best params: {study.best_params}")
 
@@ -97,7 +97,6 @@ def tune_lightgbm(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
         verbosity=-1,
         n_estimators=2000,
         random_state=42,
-        n_jobs=1,
         **study.best_params
     ).fit(X_train, y_train)
 
