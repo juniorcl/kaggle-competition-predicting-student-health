@@ -48,6 +48,7 @@ def tune_lightgbm(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
             'num_class': num_class,
             'random_state': 42,
             'n_jobs': -1,
+            'feature_pre_filter': False,
             'num_leaves': trial.suggest_int('num_leaves', 16, 256),
             'max_depth': trial.suggest_int('max_depth', 3, 12),
             'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.2, log=True),
@@ -97,6 +98,7 @@ def tune_lightgbm(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
         verbosity=-1,
         n_estimators=2000,
         random_state=42,
+        feature_pre_filter=False,
         **study.best_params
     ).fit(X_train, y_train)
 

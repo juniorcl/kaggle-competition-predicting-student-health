@@ -4,6 +4,7 @@ from src.layer_one.config import MODEL_REGISTRY
 
 
 MODEL_DIR = "models/layer_1/"
+N_TTRIALS = 60
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 
@@ -29,11 +30,11 @@ if __name__ == "__main__":
     for model_name, model_instance in MODEL_REGISTRY.items():
         print(f"\n---------- Train {model_name} ----------")
 
-        model_path = os.path.join(MODEL_DIR, f"model_{model_name}.pkl")
+        model_path = os.path.join(MODEL_DIR, f"model_{model_name}_n_trial_{N_TTRIALS}.pkl")
 
         if os.path.exists(model_path):
             print(f"Skipping {model_name} (already trained).")
             continue
 
         print(f"Training {model_name}...")
-        model_instance(X_TRAIN, Y_TRAIN_ENC, model_path, n_trials=30, n_splits=3)
+        model_instance(X_TRAIN, Y_TRAIN_ENC, model_path, n_trials=N_TTRIALS, n_splits=3)
