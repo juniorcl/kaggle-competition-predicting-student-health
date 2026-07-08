@@ -1,27 +1,17 @@
 import os
 import pandas as pd
-from src.layer_one.config import MODEL_REGISTRY
+from src.layer_two.config import MODEL_REGISTRY
 
 
-MODEL_DIR = "models/layer_1/"
-N_TTRIALS = 90
+MODEL_DIR = "models/layer_2/"
+N_TTRIALS = 30
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 
-X_TRAIN = pd.read_parquet("data/processed/X_train_raw.parquet")
+X_TRAIN = pd.read_parquet("data/processed/X_train_stacking_layer_one_model_60_trials.parquet")
 Y_TRAIN = pd.read_parquet("data/interim/y_train.parquet")
 
-category_features = [
-    'diet_type',
-    'stress_level',
-    'sleep_quality',
-    'physical_activity_level',
-    'smoking_alcohol',
-    'gender'
-]
-
-X_TRAIN = X_TRAIN.astype({feature: 'category' for feature in category_features})
 Y_TRAIN_ENC = Y_TRAIN.loc[:, 'health_condition']
 
 

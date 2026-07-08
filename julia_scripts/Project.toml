@@ -1,0 +1,8 @@
+[deps]
+Arrow = "69666777-d1a9-59fb-9406-91d4454c9d45"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Hyperopt = "93e5fe13-2215-51db-baaf-2e9a34fb2712"
+LightGBM = "7acf609c-83a4-11e9-1ffb-b912bcd3b04a"
+MLJ = "add582a8-e3ab-11e8-2d5e-e98b27df1bc7"
+Parquet2 = "98572fba-bba0-415d-956f-fa77e587d26d"
