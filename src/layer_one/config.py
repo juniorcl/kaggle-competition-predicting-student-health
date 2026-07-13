@@ -6,5 +6,5 @@ from .lightgbm_tuning import tune_lightgbm
 MODEL_REGISTRY = {
     'xgboost': tune_xgboost,
     'lightgbm': tune_lightgbm,
-    'catboost': tune_catboost,
+    # 'catboost': tune_catboost,
 }

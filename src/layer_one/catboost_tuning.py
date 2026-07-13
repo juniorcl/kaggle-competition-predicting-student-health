@@ -26,7 +26,8 @@ def tune_catboost(X_train: pd.DataFrame, y_train: pd.Series, model_path: str, n_
         'sleep_quality',
         'physical_activity_level',
         'smoking_alcohol',
-        'gender'
+        'gender',
+        # 'sleep_stress_interaction'
     ]
 
     cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)

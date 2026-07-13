@@ -1,17 +1,29 @@
 import os
 import pandas as pd
-from src.layer_two.config import MODEL_REGISTRY
+from src.layer_one.config import MODEL_REGISTRY
 
 
-MODEL_DIR = "models/layer_2/"
+MODEL_DIR = "models/layer_1/"
 N_TTRIALS = 60
+DATA_TYPE = "feat_eng"
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 
-X_TRAIN = pd.read_parquet("data/processed/X_train_stacking_layer_one_model_60_trials.parquet")
+X_TRAIN = pd.read_parquet("data/processed/X_train_fe.parquet")
 Y_TRAIN = pd.read_parquet("data/interim/y_train.parquet")
 
+category_features = [
+    'diet_type',
+    'stress_level',
+    'sleep_quality',
+    'physical_activity_level',
+    'smoking_alcohol',
+    'gender',
+    'sleep_stress_interaction'
+]
+
+X_TRAIN = X_TRAIN.astype({feature: 'category' for feature in category_features})
 Y_TRAIN_ENC = Y_TRAIN.loc[:, 'health_condition']
 
 
@@ -20,7 +32,7 @@ if __name__ == "__main__":
     for model_name, model_instance in MODEL_REGISTRY.items():
         print(f"\n---------- Train {model_name} ----------")
 
-        model_path = os.path.join(MODEL_DIR, f"model_{model_name}_n_trial_{N_TTRIALS}.pkl")
+        model_path = os.path.join(MODEL_DIR, f"{model_name}_n_trial_{N_TTRIALS}_data_type_{DATA_TYPE}.pkl")
 
         if os.path.exists(model_path):
             print(f"Skipping {model_name} (already trained).")
